@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>自定义函数</h1>
+	<ul>
+		<#assign a = "hello"/>
+		<#assign b = "world"/>
+		<li>1、自定义函数(整数排序sort_int)</li>
+		<#assign myList=[2,3,4,5,1,9,8,7,11,20]/>
+		
+		<li>未排序</li>
+		<#list myList as item>
+		   ${item},
+		</#list>
+		
+		<li>已排序</li>
+		<#list sort_int(myList) as item>
+		   ${item},
+		</#list>
+		
+		
+		<li>2、list常用指令</li>
+	    <#assign myList2=[2,3,9,10,1,100,88,23]/>
+	    升序:<BR>
+	    <#list myList2?sort as item>
+	      ${item_index} : ${item}<BR>
+	    </#list>
+	    降序:<BR>
+	    <#list myList2?sort?reverse as item>
+	      ${item_index} : ${item}<BR>
+	    </#list>	
+	    
+	    获取长度：${myList2?size}<BR>
+	    按下标获取值：${myList2[3]}<BR>
+	    
+	    
+	    <li>3、自定义指令</li>
+	    <h2>用户123456是否拥有admin角色，并且返回admin的权限</h2>
+	    <@role user='123456' role='admin'; result1, result2>
+	         <#if result1>
+	            我的角色是<font color="red">admin</font><BR>
+	         </#if>
+	         
+	         我拥用的权限是:
+	         <font color="red">
+	           <#list result2 as item>
+	            ${item},
+	           </#list>
+	         </font>
+	         <BR>
+	    </@role>
+	    
+	    
+	     <li>3、字符串内建函数</li>
+	     <h3>split</h3>
+	     <#list "a|b|c|d"?split("|") as item>
+	        ${item},
+	     </#list>
+	     <BR> 
+	     <!-- 字符串转日期  -->
+	     <#assign var1 = "01/03/2017"?date("MM/dd/yyyy")>
+	     <#assign var2 = "15:05:30"?time("HH:mm:ss")>
+	     <#assign var3 = "2017-12-31 03:05:28 PM"?datetime("yyyy-MM-dd HH:mm:ss")>
+	     <h3>date</h3>
+	     ${var1}<BR> 
+	     <h3>time</h3>
+	     ${var2}<BR>
+	     <h3>datetime</h3>
+	     ${var3}<BR>  
+	     
+	     <h3>cap_first(将字符串中的第一个单词的首字母变为大写)</h3>
+	     <#assign varCap = "hello word java"/>
+	     ${varCap?cap_first}
+	     
+	     <h3>uncap_first</h3>
+	     <#assign varUnCap = "HELLO"/>
+	     ${varUnCap?uncap_first}
+	     
+	     <h3>ends_with(以某元素结尾)</h3>
+	     <#assign varEnd = "hello word java"/>
+	     ${varEnd?ends_with('java')}
+	     
+	     <h3>contains</h3>
+	     <#assign varContains = "hello word java"/>
+	     ${varContains?contains('java')}
+	     
+	     <h3>starts_with(以某元素开头)</h3>
+	     <#assign varStarts = "hello word java"/>
+	     ${varStarts?starts_with('hello')}
+	     
+	     
+	     <h3>trim</h3>
+	     <#assign varTrim = "  hello trim  "/>
+	     ${varTrim?trim}
+	   
+	    
+	    <li>3、数字内建函数</li>
+	    <#assign numVar1 =314.6555 />
+	    ${numVar1?string("0.##")}<BR>
+	    ${numVar1?round}<BR>
+	    <#assign numVar2 =314.87/>
+	    ${numVar2?floor}<BR>
+	    
+	    <#assign numVar3 =5/2 />
+	    ${numVar3?ceiling}<BR>
+	    
+	    <li>3、list内建函数</li>
+	    <#assign listVar1=[1,2,3,4,11,12,13,14,20,21,22,23]/>
+	    size: ${listVar1?chunk(4)?size}<BR>
+	    <#list listVar1?chunk(4)?last as item>
+	      ${item},
+	    </#list>
+	    
+	    <li>4、其它内建函数</li>
+	    ${sVar?has_content?string('yes','no')}<BR>
+	    ${("1"+"2")?eval}<BR>
+	    ${("1"+"2")?eval?is_number?string("yes","no")}<BR>
+	    ${("1 + 2")?eval}<BR>
+	    
+	    
+	    <h1>macro：宏指令</h1>
+	    
+	    <li>例1：无参数的macro</li>
+	    <#macro test>
+	        <font color="red">我是无参数的macro</font>
+	    </#macro>
+	    <@test/>
+	    
+	    <li>例2：有参数的macro</li>
+	    <#macro test param1 param2>
+	       <font color="red">我是有参数的macro,param1=${param1}, param2=${param2}</font>
+	    </#macro>
+	    <@test param1="java" param2="php"/>
+	    
+	    <li>例3：有默认参数的macro</li>
+	    <#macro test param1 param2="python">
+	       <font color="red">我是有参数的macro,param1=${param1}, param2=${param2}</font>
+	    </#macro>
+	    <@test param1="java"/>
+	    
+	    <li>例3：有多个参数的macro</li>
+	    <#macro test param1 param2="python" paramExt...>
+	       <font color="red">我是有参数的macro,param1=${param1}, param2=${param2}</font>
+	       <BR>
+	       param3=${paramExt['param3']}<BR>
+	       param4=${paramExt['param4']}<BR>
+	    </#macro>
+	    <@test param1="java" param2="php" param3="python" param4="nodejs"/>
+	    
+	    
+	    <h1>nested</h1>
+	    <#macro test param1="java" param2="简单">
+	      ${param1}<BR>
+	      <#nested param1,"我的nested参数"><BR>
+	      <#nested "语法",param2><BR>
+	    </#macro>
+	    
+	    <@test param1="php"; loopVar1, loopVar2>
+	      <font color="red">hello ${loopVar1},${loopVar2}<BR></font>
+	    </@test>
+	    
+	    <@test param1="phtyon" param2="复杂"; loopVar1,loopVar2>
+	      hello ${loopVar1},${loopVar2}<BR>
+	    </@test>	
+	    
+	    
+	    <h1>函数</h1>    
+	    <#function doAdd param1 param2>
+	       <#return param1 + param2>
+	    </#function>
+	    你好，100+100和是${doAdd(100,100)}<BR>
+		
+
+</ul>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

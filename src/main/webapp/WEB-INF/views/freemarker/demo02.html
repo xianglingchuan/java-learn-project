@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>逻辑操作</h1>
+	<ul>
+		<li>赋值&运算</li>
+		<#assign a=100 />
+		a=
+		<span style="color: red">${a}</span>
+		<BR> a+100=
+		<span style="color: red">${a+100}</span>
+		<BR>
+
+
+		<li>对象取值</li> 获取不存在对象的值:
+		<span style="color: red">${user2.name!"对象不存在"}</span>
+		<BR> 获取对象存在属性不存在的值:
+		<span style="color: red">${user.name2!"值不存在"}</span>
+		<BR> 输出内容:${user.description}
+		<BR> 输出HTML内容:${user.description?html}
+		<BR>
+
+
+		<li>List循环遍历</li>
+		<#list mylist as item> ${item}<BR>
+		</#list>
+
+
+		<li>Map循环遍历</li>
+		<#list map.keySet() as k> <front color="red">${k}==${map[k]}</front>
+		<BR>
+		</#list>
+
+
+
+		<li>逻辑判断符if</li>
+		<#assign var=100 />
+
+		<#if var==99> <font color="red">var 等于99</font> </#if>
+		<BR>
+		
+
+		<#if var==99> 
+		<font color="red">var 等于99</font>
+		<#else>
+		<font color="red">var 不等于99</font>
+		</#if>
+		<BR>
+		
+		<#if var &gt; 99>
+		   <font color="red">var 大于99</font>
+		<#elseif var==99>
+		   <font color="red">var 等于99</font>
+		<#else>
+		   <font color="red">var 小于99</font>
+		</#if>
+
+
+<li>判断List是否为空</li>
+    <#if myList??>
+        myList不为空<BR>
+        <#list myList as item>
+           ${item}
+        </#list>
+    <#else>
+       myList为空<BR>
+    </#if>
+    
+    <#if myList?exists>
+       myList不为空<BR>
+    <#else>
+       myList为空<BR>
+    </#if>
+    
+ <li>if多条件||、&&、!</li>   
+    <#assign var = "python">
+    <#if (var=='python' && var?length==6) ||(var=='java')>
+        <font color="red">var is python length is 6 或者 var is java</font>      
+    </#if>
+ 
+
+
+
+<li>switch case break default</li>
+   <#assign var = 101>
+   <#switch var>
+     <#case 11>
+     <#case 10>
+	     var is 11 or 10
+	     <#break>
+     <#case 100>
+	     var is 100
+	     <#break>
+     <#default>
+     var is other
+    </#switch>
+    <BR>
+     
+   <#assign varStr = "java">
+   <#switch varStr>
+     <#case "java">
+     <#case "python">
+	     varStr is java or python
+	     <#break>
+     <#case "php">
+	     varStr is php
+	     <#break>
+     <#default>
+     varStr is other
+    </#switch>
+
+
+
+
+</ul>
+</body>
+</html>

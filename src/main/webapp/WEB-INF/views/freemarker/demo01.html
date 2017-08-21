@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>取值操作</h1>
+<ul>
+<li>整数:  <span style="color:red">${intVar}</span></li>
+<li>长整型: <span style="color:red">${longVar}</span></li>
+<li>布尔值: <span style="color:red">${booleanVar}</span></li>
+<li>布尔值: <span style="color:red">${booleanVar?string('yes','no')}</span></li>
+<li>字符串: <span style="color:red">${stringVar}</span></li>
+<li>双精度: <span style="color:red">${doubleVar}</span></li>
+<li>日期: <span style="color:red">${sqldateVar}</span></li>
+<li>日期: <span style="color:red">${utildateVar?string('yyyy-MM-dd')}</span></li>
+<li>NULL: <span style="color:red">${nullVar!'值为空'}</span></li>
+<li>NULL: <span style="color:red">${sssVar!'值不存在'}</span></li>
+</ul>
+</body>
+</html>

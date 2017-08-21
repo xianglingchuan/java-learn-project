@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>字符串操作</h1>
+	<ul>
+		<#assign a = "hello"/>
+		<#assign b = "world"/>
+		<li>连接</li>
+		<font color="red">${a+b}</font>
+		
+		<li>截取</li>
+		<font color="red">${(a+b)?substring(5,9)}</font>
+		
+		<li>长度</li>
+        <font color="red">${(a+b)?length}</font>
+        
+        <li>大写</li>
+        <font color="red">${(a+b)?upper_case}</font>
+        
+        <li>小写</li>
+        <font color="red">${(a+b)?lower_case}</font>
+        
+        <li>index_of</li>
+        <font color="red">${(a+b)?index_of('l')}</font>
+        
+        <li>last_index_of</li>
+        <font color="red">${(a+b)?last_index_of('l')}</font>
+        
+        <li>replace</li>
+        <font color="red">${(a+b)?replace('w','W')}</font>
+
+
+
+</ul>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
