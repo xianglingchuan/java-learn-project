@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3g.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<tlib-version>1.2</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>SimpleTagLibrary</short-name>
+	<uri>/learn-tag</uri>
+	<description>测试</description>
+
+
+
+	<tag>
+		<description>DateTag</description>
+		<name>DateTag</name>
+		<tag-class>com.myspringmvc.tag.DateTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+
+	<tag>
+		<description>SkipBodyOrEvalBodyIncludeTag</description>
+		<name>SkipBodyOrEvalBodyIncludeTag</name>
+		<tag-class>com.myspringmvc.tag.SkipBodyOrEvalBodyIncludeTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+
+	<tag>
+		<description>SkipPageOrEvalPageTag</description>
+		<name>SkipPageOrEvalPageTag</name>
+		<tag-class>com.myspringmvc.tag.SkipPageOrEvalPageTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+
+	<tag>
+		<description>DbConnect</description>
+		<name>DbConnect</name>
+		<tag-class>com.myspringmvc.tag.DbConnect</tag-class>
+		<body-content>empty</body-content>
+		
+		<attribute>
+		   <name>driver</name>
+		   <required>true</required>
+		   <rtexprvalue>true</rtexprvalue><!-- 支持EL表达式 -->
+		</attribute>
+		<attribute>
+		   <name>url</name>
+		   <required>true</required>
+		   <rtexprvalue>true</rtexprvalue><!-- 支持EL表达式 -->
+		</attribute>
+		<attribute>
+		   <name>password</name>
+		   <required>true</required>
+		   <rtexprvalue>true</rtexprvalue><!-- 支持EL表达式 -->
+		</attribute>
+		<attribute>
+		   <name>sql</name>
+		   <required>true</required>
+		   <rtexprvalue>true</rtexprvalue><!-- 支持EL表达式 -->
+		</attribute>		
+		<attribute>
+		   <name>username</name>
+		   <required>true</required>
+		   <rtexprvalue>true</rtexprvalue><!-- 支持EL表达式 -->
+		</attribute>		
+	</tag>
+
+	<tag>
+		<description>Iteration</description>
+		<name>Iteration</name>
+		<tag-class>com.myspringmvc.tag.IterationTagDemo</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+		   <name>var</name>
+		   <required>true</required>
+		</attribute>
+		
+		<attribute>
+		   <name>items</name>
+		   <required>true</required>
+		   <rtexprvalue>true</rtexprvalue>
+		</attribute>				
+	</tag>
+	
+	<tag>
+		<description>BodyTag</description>
+		<name>BodyTag</name>
+		<tag-class>com.myspringmvc.tag.BodyTagSupportDemo</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+		
+
+
+</taglib>
+
+
+
+
+
+
+
+
+
+
+
+
+

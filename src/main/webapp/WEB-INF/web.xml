@@ -51,7 +51,93 @@
        <session-timeout>0</session-timeout>
     </session-config>
     
-
+    
+    
+    <!-- 配置过滤器 -->
+    <filter>
+       <filter-name>FirstFilter</filter-name>
+       <filter-class>com.myspringmvc.filter.FirstFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FirstFilter</filter-name>
+        <url-pattern>/filter/filter.jsp</url-pattern>
+       <!--  <dispatcher>REQUEST</dispatcher> -->
+    </filter-mapping>
+<!--     <filter-mapping>
+        <filter-name>FirstFilter</filter-name>
+        <url-pattern>/main.jsp</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>  -->   
+    
+    <!-- <filter>
+       <filter-name>SecondFilter</filter-name>
+       <filter-class>com.myspringmvc.filter.SecondFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecondFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>//filter/error.jsp</location>
+    </error-page>
+    <filter>
+      <filter-name>ErrorFilter</filter-name>
+      <filter-class>com.myspringmvc.filter.ErrorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>ErrorFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    
+    
+    
+   <filter>
+       <filter-name>LoginFilter</filter-name>
+       <filter-class>com.myspringmvc.filter.LoginFilter</filter-class>\
+       <init-param>
+          <param-name>noLoginPaths</param-name>
+          <param-value>filter/login.jsp;filter/loginFail.jsp;LoginServlet</param-value>
+       </init-param>
+     <init-param>   <!--初始化参数-->  
+         <param-name>encoding</param-name>  <!--参数名称-->  
+         <param-value>utf-8</param-value>   <!--参数值-->  
+     </init-param>       
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+        
+    
+    
+    
+   <servlet>
+    	<description></description>
+    	<display-name>AsyncServlet</display-name>
+    	<servlet-name>AsyncServlet</servlet-name>
+    	<servlet-class>com.myspringmvc.filter.AsyncServlet</servlet-class>
+    	<!-- 支持异步请求 -->
+    	<async-supported>true</async-supported>    	
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>AsyncServlet</servlet-name>
+    	<url-pattern>/AsyncServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+    	<display-name>LoginServlet</display-name>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<servlet-class>com.myspringmvc.filter.LoginServlet</servlet-class>
+    </servlet>    
+    <servlet-mapping>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
 
     <!-- 配置DispatchcerServlet -->
     <servlet>
@@ -64,10 +150,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>springDispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
 
+    
 </web-app>
