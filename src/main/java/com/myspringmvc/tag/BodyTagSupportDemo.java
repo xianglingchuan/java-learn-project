@@ -8,6 +8,9 @@ import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import javax.servlet.jsp.tagext.SimpleTag;
+
+
 public class BodyTagSupportDemo extends BodyTagSupport {
 	
 	private BodyContent bodyContent;
