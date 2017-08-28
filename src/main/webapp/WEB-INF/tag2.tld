@@ -10,66 +10,87 @@
 	<description>测试</description>
 
 
-   <tag>
-      <name>DateInfo</name>
-      <tag-class>com.myspringmvc.tag2.DisplayInfo</tag-class>
-      <body-content>empty</body-content>
-   </tag>
-   
-   <tag>
-      <name>DisplayOrSkipBody</name>
-      <tag-class>com.myspringmvc.tag2.DisplayOrSkipBody</tag-class>
-      <body-content>scriptless</body-content>
-   </tag>
+	<tag>
+		<name>DateInfo</name>
+		<tag-class>com.myspringmvc.tag2.DisplayInfo</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>DisplayOrSkipBody</name>
+		<tag-class>com.myspringmvc.tag2.DisplayOrSkipBody</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
 
 
-   <tag>
-      <name>SkipPageOrEvalPage</name>
-      <tag-class>com.myspringmvc.tag2.SkipPageOrEvalPage</tag-class>
-      <body-content>scriptless</body-content>
-   </tag>
+	<tag>
+		<name>SkipPageOrEvalPage</name>
+		<tag-class>com.myspringmvc.tag2.SkipPageOrEvalPage</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
 
+
+
+	<tag>
+		<name>IterationTagDemo</name>
+		<tag-class>com.myspringmvc.tag2.IterationTagDemo</tag-class>
+		<body-content>scriptless</body-content>
+
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+		</attribute>
+
+		<attribute>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+
+	<tag>
+		<name>ModifyBodyContent</name>
+		<tag-class>com.myspringmvc.tag2.ModifyBodyContent</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+
+
+	<tag>
+		<name>IfTag</name>
+		<tag-class>com.myspringmvc.tag2.IfTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 	
 	
-   <tag>
-      <name>IterationTagDemo</name>
-      <tag-class>com.myspringmvc.tag2.IterationTagDemo</tag-class>
-      <body-content>scriptless</body-content>
-      
-      <attribute>
-         <name>name</name>
-         <required>true</required>
-      </attribute>
-      
-      <attribute>
-         <name>items</name>
-         <required>true</required>
-         <rtexprvalue>true</rtexprvalue>
-      </attribute>      
-   </tag>
-   
-   
-   <tag>
-      <name>ModifyBodyContent</name>
-      <tag-class>com.myspringmvc.tag2.ModifyBodyContent</tag-class>
-      <body-content>scriptless</body-content>
-   </tag>
-      
-      
-   <tag>
-      <name>IfTag</name>
-      <tag-class>com.myspringmvc.tag2.IfTag</tag-class>
-      <body-content>scriptless</body-content>
-      
-      
-      <attribute>
-         <name>test</name>
-         <required>true</required>
-         <rtexprvalue>true</rtexprvalue>
-      </attribute> 
-            
-      
-   </tag>
+	<tag>
+		<name>Choose</name>
+		<tag-class>com.myspringmvc.tag2.ChooseTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
+	<tag>
+		<name>When</name>
+		<tag-class>com.myspringmvc.tag2.WhenTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
+	</tag>
+	
+	<tag>
+		<name>OtherWise</name>
+		<tag-class>com.myspringmvc.tag2.OtherWiseTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>	
+	
 
 </taglib>
 
