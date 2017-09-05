@@ -59,11 +59,11 @@ public class SynchronizedDemo {
 		SynchronizedDemo demo = new SynchronizedDemo();
 		demo .new WriteReadThread(true).start();
 		
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		demo .new WriteReadThread(false).start();
 	}
