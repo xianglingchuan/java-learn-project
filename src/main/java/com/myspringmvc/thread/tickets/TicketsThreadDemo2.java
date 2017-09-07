@@ -12,7 +12,7 @@ public class TicketsThreadDemo2 {
 	
 	
 	public void Sell(String name){
-		if(ticketsCount > 0){
+		while(ticketsCount > 0){
 			ticketsCount = ticketsCount-1;
 			System.out.println(name + "买了一张票,当前还余" + ticketsCount + "张票");
 		}
@@ -31,7 +31,6 @@ public class TicketsThreadDemo2 {
 		@Override 
 		public void run(){
 			Sell(name);
-			
 		}
 	}	
 	
@@ -39,6 +38,7 @@ public class TicketsThreadDemo2 {
 		TicketsThreadDemo2 demo = new TicketsThreadDemo2();
 		demo.new SellThread("窗口1").start();
 		demo.new SellThread("窗口2").start();
+		demo.new SellThread("窗口3").start();
 	}
 
 }
