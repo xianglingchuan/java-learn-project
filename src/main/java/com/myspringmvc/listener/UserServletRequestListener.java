@@ -15,7 +15,7 @@ import org.omg.CORBA.SystemException;
 import com.myspringmvc.listener.entity.OnlineUser;
 import com.myspringmvc.listener.util.OnlineUserUtil;
 
-@WebListener("this is a UserServletRequestListener")
+//@WebListener("this is a UserServletRequestListener")
 public class UserServletRequestListener implements ServletRequestListener {
 
 	

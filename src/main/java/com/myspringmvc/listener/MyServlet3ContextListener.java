@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 
-@WebListener("This a servlet3.0 listener 3.0")
+//@WebListener("This a servlet3.0 listener 3.0")
 public class MyServlet3ContextListener implements ServletContextListener {
 
 	@Override
