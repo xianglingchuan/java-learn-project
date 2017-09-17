@@ -20,10 +20,15 @@
     http://www.springframework.org/schema/aop 
     http://www.springframework.org/schema/aop/spring-aop.xsd">
     
+   
     
    <!-- 配置自动扫描的包 -->
    <context:component-scan base-package="com.myspringmvc"></context:component-scan>     
-        
+   
+    <!-- 开启自动代理 true 使用CGLib动态代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />   
+   
+   
    <!-- ********start freeMarker整配置********  -->             
     <!-- 配置freeMarker的模板路径 -->  
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
@@ -61,7 +66,8 @@
     
     <!-- ********end freeMarker整配置********  -->
     
-    
+       
+   
     
     <!--ViewResolver 视图解析器 用于支持Servlet、JSP视图解析-->  
     <!-- 如果没有找到freeMarker模板时会去搜索相关的jsp视图 -->

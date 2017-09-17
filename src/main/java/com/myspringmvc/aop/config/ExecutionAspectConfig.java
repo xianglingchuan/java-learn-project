@@ -38,6 +38,14 @@ public class ExecutionAspectConfig {
 //		System.out.println("before ExecutionAspectConfig....");
 //	}
 	
-	
+//	@Pointcut("execution(public * com.myspringmvc.aop.service..*Service.*(..))")
+//	public void matchCondition() {
+//	}
+//
+//	@Before("matchCondition()")
+//	public void before() {
+//		System.out.println("");
+//		System.out.println("###before");
+//	}	
 	
 }
