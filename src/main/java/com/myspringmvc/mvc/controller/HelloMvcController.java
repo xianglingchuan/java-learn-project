@@ -10,16 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspringmvc.aop.service.ProductService;
 import com.myspringmvc.entity.User;
 
 @Controller
 @RequestMapping("/hello")
 public class HelloMvcController {
      
-	@Autowired
-	private ProductService productService;
-	
 	
 	
 	@RequestMapping("mvc")
@@ -30,10 +26,6 @@ public class HelloMvcController {
 		List<User> userList = this.createUserData();
 		System.out.println("userList:"+userList.size());
 		mView.addObject("userList", this.createUserData());
-		
-		System.out.println("productService====="+productService);
-		
-		
 		return mView;
 	}
 	
