@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3g.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<tlib-version>1.2</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>SimpleTagLibrary</short-name>
+	<uri>/learn-tag2</uri>
+	<description>测试</description>
+
+
+	<tag>
+		<name>DateInfo</name>
+		<tag-class>com.myspringmvc.tag2.DisplayInfo</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>DisplayOrSkipBody</name>
+		<tag-class>com.myspringmvc.tag2.DisplayOrSkipBody</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+
+
+	<tag>
+		<name>SkipPageOrEvalPage</name>
+		<tag-class>com.myspringmvc.tag2.SkipPageOrEvalPage</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+
+
+
+	<tag>
+		<name>IterationTagDemo</name>
+		<tag-class>com.myspringmvc.tag2.IterationTagDemo</tag-class>
+		<body-content>scriptless</body-content>
+
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+		</attribute>
+
+		<attribute>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+
+	<tag>
+		<name>ModifyBodyContent</name>
+		<tag-class>com.myspringmvc.tag2.ModifyBodyContent</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+
+
+	<tag>
+		<name>IfTag</name>
+		<tag-class>com.myspringmvc.tag2.IfTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<name>Choose</name>
+		<tag-class>com.myspringmvc.tag2.ChooseTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
+	<tag>
+		<name>When</name>
+		<tag-class>com.myspringmvc.tag2.WhenTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
+	</tag>
+	
+	<tag>
+		<name>OtherWise</name>
+		<tag-class>com.myspringmvc.tag2.OtherWiseTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>	
+	
+
+</taglib>
+
+
+
+
+
+
+
+
+
+
+
+
+
