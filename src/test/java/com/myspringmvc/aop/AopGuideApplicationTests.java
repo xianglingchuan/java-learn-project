@@ -3,12 +3,15 @@ package com.myspringmvc.aop;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.myspringmvc.aop.security.CurrentUserHolder;
 import com.myspringmvc.aop.service.ProductService;
 
 
+@RunWith(SpringJUnit4ClassRunner.class)    
+@ContextConfiguration(locations = {"classpath*:/applicationContext.xml","classpath*:/mvc-dispatcher-servlet.xml"})  
 public class AopGuideApplicationTests {
 	
 	
