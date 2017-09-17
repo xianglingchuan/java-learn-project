@@ -1,4 +1,4 @@
-package com.myspringmvc.controller;
+package com.myspringmvc.mvc.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
