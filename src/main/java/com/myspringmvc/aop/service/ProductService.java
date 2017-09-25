@@ -18,8 +18,6 @@ public class ProductService implements Loggable {
 		
 	}
 	
-	
-
     public String getName(){
         System.out.println("execute get name");
         return "product service";
@@ -37,7 +35,13 @@ public class ProductService implements Loggable {
     public void findByTwoArgs(Long id,String name){
         System.out.println("execute find by id and name");
     }	
-	
+    
+    
+    public void setAnnoService(AnnoService annoService){
+    	System.out.println("execute setAnnoService");
+    }
+    
+    
 	
 //	@Autowired
 //	private AuthService authService;

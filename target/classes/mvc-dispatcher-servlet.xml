@@ -23,7 +23,7 @@
    
     
    <!-- 配置自动扫描的包 -->
-   <context:component-scan base-package="com.myspringmvc.aop"></context:component-scan>     
+   <context:component-scan base-package="com.myspringmvc"></context:component-scan>     
    
     <!-- 开启自动代理 true 使用CGLib动态代理 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />   

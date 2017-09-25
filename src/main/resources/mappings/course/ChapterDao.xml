@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springmvc.course.dao.ChapterDao">
+	<resultMap type="com.springmvc.course.bean.Chapter" id="ChapterResult">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="courseId" jdbcType="VARCHAR" property="course_id" />
+		<result column="order" jdbcType="INTEGER" property="order" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="descr" jdbcType="VARCHAR" property="descr" />
+	</resultMap>
+</mapper>

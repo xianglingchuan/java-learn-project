@@ -37,56 +37,41 @@
     	
     
 	<!-- 引入配置文件 -->
-    <!--<bean id="propertyConfigurer"
+    <bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
-	</bean>-->
+	</bean>
 	<!-- 配置数据源 -->
-    <!--<bean id="dataSource"
+    <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/learn" />
 		<property name="username" value="root" />
 		<property name="password" value="111111" />
-	</bean> -->
+	</bean>
 	
 	
 
 
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
-<!-- 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="multipleDataSource" />
-		自动扫描mapping.xml文件
+		<!-- 自动扫描mapping.xml文件 -->
 		<property name="mapperLocations" value="classpath:mappings/**/*.xml"></property>
-		就算不引入mybatis-config文件也可以正常启动程序了
-		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
-		<property name="configLocation" value="classpath*:conf/mybatis-config.xml"></property>
+		<!-- 就算不引入mybatis-config文件也可以正常启动程序了 -->
+		<!-- <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property> -->
 	</bean> 
 	
-	DAO接口所在包名，Spring会自动查找其下的类
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.springmvc/**/dao" />
+		<property name="basePackage" value="com.myspringmvc/**/dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-	</bean> -->
-	
-	
-	  <!-- 使用注解注入properties中的值 -->
-<!-- 	  <bean id="config"
-	     class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-	    <property name="locations">
-	      <list>
-	        <value>classpath:sysConf.properties</value>
-	      </list>
-	    </property>
-	    设置编码格式
-	    <property name="fileEncoding" value="UTF-8"></property>
-	  </bean> -->
-  	
+	</bean>
 	
 	
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
-<!-- 	<bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSourceDev" />
-	</bean> -->
+	</bean>
 </beans>

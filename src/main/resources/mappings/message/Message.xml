@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Message">
+	<resultMap type="com.message.bean.Message" id="MessageResult">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="COMMAND" jdbcType="VARCHAR" property="command" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+	</resultMap>
+
+
+	<select id="queryList" parameterType="com.message.bean.Message"
+		resultMap="MessageResult">
+		SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message WHERE 1=1
+		<!-- command!=null && !"".equals(command.trim()) -->
+		<!-- <if test="command!=null &amp;&amp; !&quot;&quot;.equals(command.trim())"> 
+			AND COMMAND=?</if> -->
+		<if test="command!=null and !&quot;&quot;.equals(command.trim())">
+			AND COMMAND=#{command}
+		</if>
+		<if test="description!=null and !&quot;&quot;.equals(description.trim())">
+			AND DESCRIPTION LIKE '%' #{description} '%'
+		</if>
+	</select>
+
+
+	<delete id="deleteOne" parameterType="int">
+		DELETE FROM message WHERE
+		ID=#{_parameter}
+	</delete>
+
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		DELETE FROM message WHERE ID IN(
+		<foreach collection="array" index="index" item="item"
+			separator=",">
+			${item}
+		</foreach>
+		)
+	</delete>
+
+
+	<select id="get" parameterType="com.message.bean.Message" resultMap="MessageResult">
+		SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message WHERE 1=1
+		<if test="id!=null">
+			AND ID=#{id}
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="com.message.bean.Message">
+		INSERT INTO
+		message(ID,COMMAND,DESCRIPTION,CONTENT)
+		VALUES(null,#{command},#{description},#{content});
+	</insert>
+
+	<update id="update" parameterType="com.message.bean.Message">
+		update message
+		set COMMAND = #{command,jdbcType=VARCHAR},
+		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=VARCHAR}
+		where 1=1
+		<if test="id != null">
+			AND id = #{id,jdbcType=INTEGER}
+		</if>
+	</update>
+	
+	<!--  
+	trim 属性
+	  prefix：前缀覆盖并增加其内容
+	  suffix：后缀覆盖并增加其内容
+	  prefixOverrides：前缀判断的条件
+	  suffixOverrides：后缀判断的条件
+	trim元素的主要功能是可以在自己包含的内容钱加上某些前缀，也可以在其后加上某写后缀，与之对应的属性是prefix和suffix；
+	可以把包含内容的首部某些内容覆盖，即忽略，也可以把尾部的某些内容覆盖，对应的属性是prefixOverrides和suffixOverrides。
+	-->	
+	
+	 <!-- 
+	 请注意这里的${command}的使用方法， order by ${command}
+	 -->
+	  <select id="queryListByTrim" parameterType="com.message.bean.Message" resultMap="MessageResult">    
+	    select * from message
+	    <trim prefix="WHERE" prefixOverrides="AND|OR"> 
+	       <if test="description != null"> AND DESCRIPTION=#{description} </if> 
+	       <if test="command != null"> AND COMMAND=#{command} </if> 
+	    </trim>
+	    order by ${command}
+	  </select>
+	  <!-- select * from message WHERE COMMAND=?  -->
+	
+	
+	<update id="updateByTrim" parameterType="com.message.bean.Message">
+		update message
+		<trim prefix="set" suffixOverrides="," suffix="where id = #{id} ">
+			<if test="description != null and description.length()>0">DESCRIPTION=#{description},</if>
+			<if test="command != null and command.length()>0">COMMAND = #{command,jdbcType=VARCHAR},</if>
+		</trim>
+	</update>
+	<!-- update message set COMMAND = ? where id = ?  -->
+	
+	
+	
+	<!-- 自动获取已自增长的ID号，将自增长ID号存入com.message.bean.Message对象的id属性中 -->
+	<insert id="insertByTrim" useGeneratedKeys="true" keyProperty="id" parameterType="com.message.bean.Message">
+        INSERT INTO message 
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="command != null">COMMAND,</if>
+            <if test="description != null">DESCRIPTION,</if>
+            <if test="content != null">CONTENT,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            null,
+            <if test="command != null">#{command,jdbcType=VARCHAR},</if>
+            <if test="description != null">#{description,jdbcType=VARCHAR},</if>
+            <if test="content != null">#{content,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <!-- INSERT INTO message ( ID, COMMAND, DESCRIPTION, CONTENT ) values ( null, ?, ?, ? ) -->
+</mapper>

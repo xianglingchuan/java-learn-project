@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springmvc.course.dao.CourseDao">
+	<resultMap type="com.springmvc.course.bean.Course" id="CourseResult">
+		<id column="courseId" jdbcType="INTEGER" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="imgPath" jdbcType="VARCHAR" property="img_path" />
+		<result column="learningNum" jdbcType="INTEGER" property="learning_num" />
+		<result column="duration" jdbcType="BIGINT" property="duration" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="levelDesc" jdbcType="VARCHAR" property="level_desc" />
+		<result column="descr" jdbcType="VARCHAR" property="descr" />		
+	</resultMap>	
+	
+	<select id="findList" parameterType="com.springmvc.course.bean.Course" resultMap="CourseResult">
+		SELECT id,title,img_path,learning_num,duration,level,level_desc, descr
+		FROM course
+	</select>
+</mapper>
