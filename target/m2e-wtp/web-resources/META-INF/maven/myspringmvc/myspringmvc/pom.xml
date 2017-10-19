@@ -125,67 +125,98 @@
 		</dependency>
 		<!-- Spring aop end -->
 
-          
-        <!-- Spring AOP代码演示实例 -->
+
+		<!-- Spring AOP代码演示实例 -->
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 
 
-<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-<!-- <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>5.2.10.Final</version>
-</dependency> -->
+		<!-- start Java定时任务调度工具详解之Quartz篇 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!-- end Java定时任务调度工具详解之Quartz篇 -->
 
 
-<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-<!-- <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>5.2.6.Final</version>
-</dependency>
+		<!-- start memcached -->
+		<!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
+		<!-- <dependency> <groupId>commons-pool</groupId> <artifactId>commons-pool</artifactId> 
+			<version>1.6</version> </dependency> -->
 
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>3.1.0</version>
-    <scope>provided</scope>
-</dependency> -->
+		<!-- <dependency> <groupId>com.danga</groupId> <artifactId>memcached</artifactId> 
+			<version>2.6.6</version> </dependency> <dependency> <groupId>com.danga</groupId> 
+			<artifactId>java-memcached</artifactId> <version>2.6.6</version> </dependency> -->
 
-<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-<!-- <dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.4</version>
-</dependency> -->
-<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-<!-- <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-entitymanager</artifactId>
-    <version>5.2.10.Final</version>
-</dependency> -->
-<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
-<!-- <dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-commons</artifactId>
-    <version>1.13.6.RELEASE</version>
-</dependency> -->
-
-<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-<!-- <dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-jpa</artifactId>
-    <version>1.8.0.RELEASE</version>
-</dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode/hibernate-memcached -->
+		<dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>hibernate-memcached</artifactId>
+			<version>1.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- end memcached -->
+		
 
 
 
-<!-- https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3 -->
-<dependency>
-    <groupId>org.eclipse.paho</groupId>
-    <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-    <version>1.0.2</version>
-</dependency>
+		<!-- start hibernate -->
+		<!-- 注释类 -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- 在4.3.11.Final下可以运行成功 -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> 
+			<version>4.3.11.Final</version> </dependency> -->
+
+		<!-- 去掉c3p0扩展能正常动行，应该是core包含了c3p0 -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-c3p0</artifactId> 
+			<version>5.1.2.Final</version> </dependency> -->
+		<!-- <dependency> <groupId>com.mchange</groupId> <artifactId>c3p0</artifactId> 
+			<version>0.9.5.2</version> </dependency> -->
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.1.2.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.20.0-GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<version>3.3.1.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml</groupId>
+			<artifactId>classmate</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+		<!-- end hibernate -->
 
 
 

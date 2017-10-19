@@ -34,7 +34,6 @@
     <!-- Junit 测试是否正确引入spring配置文件 -->
     <!-- <bean id="currentDate" class="java.util.Date"></bean> -->
     
-    	
     
 	<!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
@@ -74,4 +73,70 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSourceDev" />
 	</bean>
+	
+	
+	
+	
+	
+	
+	
+   <!-- =========  配置Memcached ========= -->  
+   <!-- 开启缓存 -->    
+   <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" />    
+    <!-- 导入外部properties -->  
+    <context:property-placeholder location="classpath:memcached.properties"/>  
+      
+     <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"  
+        factory-method="getInstance" init-method="initialize" destroy-method="shutDown">  
+       <constructor-arg>  
+            <value>neeaMemcachedPool</value>  
+        </constructor-arg>  
+        <property name="servers">  
+            <list>  
+                <value>${memcache.server}</value>  
+            </list>  
+        </property>  
+        <property name="initConn">  
+            <value>${memcache.initConn}</value>  
+        </property>  
+        <property name="minConn">  
+            <value>${memcache.minConn}</value>  
+        </property>  
+        <property name="maxConn">  
+            <value>${memcache.maxConn}</value>  
+        </property>  
+        <property name="maintSleep">  
+            <value>${memcache.maintSleep}</value>  
+        </property>  
+        <property name="nagle">  
+            <value>${memcache.nagle}</value>  
+        </property>  
+        <property name="socketTO">  
+            <value>${memcache.socketTO}</value>  
+        </property>  
+    </bean>  
+      
+    <!-- 配置MemcachedClient -->  
+    <bean id="memcachedClient" class="com.danga.MemCached.MemCachedClient">  
+        <constructor-arg>  
+            <value>neeaMemcachedPool</value>  
+        </constructor-arg>  
+    </bean>  
+      
+    <!-- 配置缓存管理 -->  
+    <bean id="cacheManager" class="com.myspringmvc.memcached.cached.MemcachedCacheManager">  
+        <property name="memcachedClient" ref="memcachedClient"/>  
+        <!-- 配置缓存时间 -->   
+        <property name="configMap">  
+             <map>  
+                 <!-- key缓存对象名称   value缓存过期时间 -->   
+                 <entry key="systemCache" value="3600"/>  
+             </map>  
+        </property>  
+    </bean>  	
+	
+	
+	
+	
+	
 </beans>

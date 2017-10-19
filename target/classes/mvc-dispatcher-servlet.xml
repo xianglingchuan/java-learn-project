@@ -20,14 +20,33 @@
     http://www.springframework.org/schema/aop 
     http://www.springframework.org/schema/aop/spring-aop.xsd">
     
-   
+	<!-- 设定消息转换的编码为utf-8防止controller返回中文乱码 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
     
+	<!-- 添加注解驱动 -->
+	<mvc:annotation-driven />
+	    
    <!-- 配置自动扫描的包 -->
    <context:component-scan base-package="com.myspringmvc"></context:component-scan>     
    
     <!-- 开启自动代理 true 使用CGLib动态代理 -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />   
+	<!-- <aop:aspectj-autoproxy proxy-target-class="true" />    -->
    
+  
    
    <!-- ********start freeMarker整配置********  -->             
     <!-- 配置freeMarker的模板路径 -->  
@@ -62,8 +81,7 @@
         <property name="requestContextAttribute" value="rc" />  
         <property name="cache" value="true" />
         <property name="order" value="0"/>        
-    </bean>  
-    
+    </bean>   
     <!-- ********end freeMarker整配置********  -->
     
        
@@ -75,8 +93,56 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
         <property name="prefix" value="/WEB-INF/views/"/>  
         <property name="suffix" value=".jsp"/>  
-    </bean>          
-         
+    </bean>      
+    
+    <!-- start 添加定时器 -->    
+	<bean id="simpleJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="myBean" />
+		<property name="targetMethod" value="printMessage" />
+	</bean>  
+
+	<bean id="firstComplexJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass"
+			value="com.myspringmvc.quartz.login.FirstScheduledJob" />
+		<property name="jobDataMap">
+			<map>
+				<entry key="anotherBean" value-ref="anotherBean" />
+			</map>
+		</property>
+		<property name="Durability" value="true"/>				
+	</bean>
+ 
+	<!-- 距离当前时间1秒之后执行，之后每隔两秒钟执行一次 -->
+	<bean id="mySimpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+	    <property name="jobDetail"  ref="simpleJobDetail"/>
+	    <property name="startDelay"  value="1000"/>
+	    <property name="repeatInterval"  value="2000"/>
+	</bean>
+	
+	<!-- 每隔5秒钟执行一次 -->
+	<bean id="myCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	    <property name="jobDetail"  ref="firstComplexJobDetail"/>
+	    <property name="cronExpression"  value="0/5 * * ? * *"/>
+	</bean> 
+ 
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="jobDetails">
+	        <list>
+	            <ref bean="simpleJobDetail"/>
+	            <ref bean="firstComplexJobDetail"/>
+	        </list>
+	    </property>
+	    <property name="triggers">
+	        <list>
+	            <ref bean="mySimpleTrigger"/>
+	            <ref bean="myCronTrigger"/>
+	        </list>
+	    </property>
+	</bean> 
+ 
+	<!-- end 添加定时器 -->  
         
 
 </beans>
