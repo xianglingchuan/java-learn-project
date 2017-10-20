@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   <mapper namespace="Command">
+	<resultMap type="com.message.bean.Command" id="CommandResult">
+		<id column="C_ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<!--一对多的关系结构-->
+		<collection property="contentList" resultMap="CommandContent.ContentResult" />
+	</resultMap>
+
+
+    <sql id="columns">ID,NAME,DESCRIPTION</sql>
+    <sql id="find_columns">A.ID as C_ID,A.NAME,A.DESCRIPTION,B.ID,B.CONTENT,B.COMMAND_ID</sql>
+    <sql id="tableName">command</sql>
+   
+
+	<select id="queryList" parameterType="com.message.bean.Command" resultMap="CommandResult">
+		SELECT <include refid="find_columns"/>
+		FROM <include refid="tableName"/> as A
+		LEFT JOIN command_content as B ON B.COMMAND_ID = A.ID
+		<where>		
+ 			<if test="name!=null and !&quot;&quot;.equals(name.trim())">
+				AND A.NAME=#{name}
+			</if>
+			<if test="description!=null and !&quot;&quot;.equals(description.trim())">
+				AND A.DESCRIPTION LIKE '%' #{description} '%'
+			</if>
+		</where>
+	</select>
+
+	<select id="get" parameterType="com.message.bean.Command" resultMap="CommandResult">
+		SELECT <include refid="find_columns"/>
+		FROM <include refid="tableName"/> as A
+		LEFT JOIN command_content as B ON B.COMMAND_ID = A.ID
+		<where>
+			<if test="id!=null">
+				AND A.ID=#{id}
+			</if>
+	 		<if test="name!=null and !&quot;&quot;.equals(name.trim())">
+				AND A.NAME=#{name}
+			</if>					
+		</where>
+	</select>
+
+
+
+<!-- 
+	<delete id="deleteOne" parameterType="int">
+		DELETE FROM message WHERE
+		ID=#{_parameter}
+	</delete>
+
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		DELETE FROM message WHERE ID IN(
+		<foreach collection="array" index="index" item="item"
+			separator=",">
+			${item}
+		</foreach>
+		)
+	</delete>
+
+
+	<select id="get" parameterType="com.message.bean.Message"
+		resultMap="MessageResult">
+		SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message WHERE 1=1
+		<if test="id!=null">
+			AND ID=#{id}
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="com.message.bean.Message">
+		INSERT INTO
+		message(ID,COMMAND,DESCRIPTION,CONTENT)
+		VALUES(null,#{command},#{description},#{content});
+	</insert>
+
+
+	<update id="update" parameterType="com.message.bean.Message">
+		update message
+		set COMMAND = #{command,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{description,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=VARCHAR}
+		where 1=1
+		<if test="id != null">
+			AND id = #{id,jdbcType=INTEGER}
+		</if>
+	</update> -->
+	
+	
+	
+</mapper>

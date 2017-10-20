@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.omg.CORBA.SystemException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,8 @@ import com.myspringmvc.entity.User;
 @RequestMapping("/hello")
 public class HelloMvcController {
      
+	
+	
 	@RequestMapping("mvc")
 	public ModelAndView helloMvc(){
 		System.out.println("hello MVC");

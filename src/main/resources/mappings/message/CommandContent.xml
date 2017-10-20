@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   <mapper namespace="CommandContent">
+	<resultMap type="com.message.bean.CommandContent" id="ContentResult">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="COMMAND_ID" jdbcType="VARCHAR" property="commandId" />
+		<!--多对一的关系关联-->
+		<association property="command" resultMap="Command.CommandResult" />
+	</resultMap>
+	
+
+    <sql id="columns">ID,CONTENT,COMMAND_ID</sql>
+    <sql id="find_columns">A.ID,A.CONTENT,A.COMMAND_ID,B.ID as C_ID,B.NAME,B.DESCRIPTION</sql>
+    <sql id="tableName">command_content</sql>
+
+
+	<select id="queryList" parameterType="com.message.bean.CommandContent" resultMap="ContentResult">
+		SELECT <include refid="find_columns"/>
+		FROM <include refid="tableName"/> as A
+		LEFT JOIN command as B ON B.ID = A.COMMAND_ID
+		<where>
+		
+			<if test="commandId!=null and commandId!=0">
+				AND A.COMMAND_ID=#{commandId}
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="get" parameterType="com.message.bean.CommandContent" resultMap="ContentResult">
+		SELECT <include refid="find_columns"/>
+		FROM <include refid="tableName"/> as A
+		LEFT JOIN command as B ON B.id = A.COMMAND_ID
+		<where>
+			<if test="commandId!=null and commandId!=0">
+				AND A.COMMAND_ID=#{commandId}
+			</if>
+			<if test="id!=null and id!=0">
+				AND A.ID=#{id}
+			</if>		
+		</where>
+	</select>
+	
+	
+	<update id="update" parameterType="com.message.bean.CommandContent">
+		update <include refid="tableName"/>
+		<set>
+			<if test="content != null">
+			  CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="commandId != null and commandId!=0">
+			  COMMAND_ID = #{commandId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	
+	
+    <select id="findInfoByOneParam" parameterType="Map" resultMap="ContentResult">  
+        select <include refid="columns"/> 
+        from <include refid="tableName"/>
+        <choose>  
+            <when test="keyword!=null and keyword=='第一条'.toString()">  
+                where ID=1  
+            </when>  
+            <when test="keyword!=null and keyword=='第二条'.toString()">  
+                where ID=2
+            </when>              
+            <otherwise>  
+                where ID=3
+            </otherwise>             
+        </choose>  
+    </select> 
+    
+    	
+	
+	
+		
+		
+	
+	
+</mapper>

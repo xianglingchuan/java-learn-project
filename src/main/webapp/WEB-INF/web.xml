@@ -1,61 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 测试3.0版本 -->
-<!-- <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="http://java.sun.com/xml/ns/javaee"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    id="WebApp_ID" version="3.0"> -->
-
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    id="WebApp_ID" version="2.5">
+    id="WebApp_ID" version="3.0"> 
 
 
 
+  <!--start Spring 相关配置-->
+    <!-- ***************** -->
+    <!-- 配置Spring容器 -->
+    <context-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>classpath:config/applicationContext*.xml</param-value>
+    </context-param>
+    
+    <!-- 配置DispatchcerServlet -->
+    <servlet>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 配置Spring mvc下的配置文件的位置和名称 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:config/mvc-dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>  
 
-	<!--start Spring 相关配置 -->
-	<!-- ***************** -->
-	<!-- 配置Spring容器 -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext*.xml</param-value>
-	</context-param>
-	
+
+    <!--start Spring 相关配置-->
+    <!-- ***************** -->
+    <!-- 配置Spring容器 -->
+<!--     <context-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>classpath:applicationContext*.xml</param-value>
+    </context-param> -->
+    
     <!-- 自定义初始化参数可以在FirstListener中获取-->
-    <context-param>         
+<!--     <context-param>         
          <param-name>initParam</param-name>
          <param-value>myspringMVC</param-value>
-    </context-param>	
-	
+    </context-param> -->
+        
+    
 	<!-- 配置一个监听器 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-		<!-- 引入自定义监听器 -->
-		<listener-class>com.myspringmvc.listener.MyServletContextListener</listener-class>
-		<listener-class>com.myspringmvc.listener.MyHttpSessionListener</listener-class>
-		<listener-class>com.myspringmvc.listener.MyServletRequestListener</listener-class>
-		<listener-class>com.myspringmvc.listener.MyServletContextAttributeListener</listener-class>
-		<listener-class>com.myspringmvc.listener.MyHttpSessionAttributeListener</listener-class>
-	</listener>
-	<!-- 配置前端控制器 -->
-
-	<session-config>
-		<!--配置session的过期时间0=不设备过期时间 单位为分钟 -->
-		<session-timeout>0</session-timeout>
-	</session-config>
-
-
-
+<!-- 	<listener>
+	     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
+	     <!-- 引入自定义监听器 -->
+<!-- 	     <listener-class>com.myspringmvc.listener.MyServletContextListener</listener-class>
+	     <listener-class>com.myspringmvc.listener.MyHttpSessionListener</listener-class>
+	     <listener-class>com.myspringmvc.listener.MyServletRequestListener</listener-class>
+	     
+	     <listener-class>com.myspringmvc.listener.MyServletContextAttributeListener</listener-class>
+	     <listener-class>com.myspringmvc.listener.MyHttpSessionAttributeListener</listener-class>
+	     <listener-class>com.myspringmvc.listener.MyServletRequestAttributeListener</listener-class> -->
+<!-- 	</listener> -->
+    <!-- 配置前端控制器 -->
+    
+<!--     
+    <session-config>
+       配置session的过期时间0=不设备过期时间 单位为分钟 
+       <session-timeout>0</session-timeout>
+    </session-config> -->
+    
+    
+    
     <!-- 配置过滤器 -->
-    <filter>
+ <!--    <filter>
        <filter-name>FirstFilter</filter-name>
        <filter-class>com.myspringmvc.filter.FirstFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>FirstFilter</filter-name>
         <url-pattern>/filter/filter.jsp</url-pattern>
-       <!--  <dispatcher>REQUEST</dispatcher> -->
-    </filter-mapping>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping> -->
 <!--     <filter-mapping>
         <filter-name>FirstFilter</filter-name>
         <url-pattern>/main.jsp</url-pattern>
@@ -71,7 +94,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping> -->
     
-    <error-page>
+  <!--   <error-page>
         <error-code>404</error-code>
         <location>//filter/error.jsp</location>
     </error-page>
@@ -84,70 +107,70 @@
       <url-pattern>/*</url-pattern>
       <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+     -->
     
     
-    
-   <filter>
+<!--    <filter>
        <filter-name>LoginFilter</filter-name>
        <filter-class>com.myspringmvc.filter.LoginFilter</filter-class>\
        <init-param>
           <param-name>noLoginPaths</param-name>
           <param-value>filter/login.jsp;filter/loginFail.jsp;LoginServlet</param-value>
        </init-param>
-     <init-param>   <!--初始化参数-->  
-         <param-name>encoding</param-name>  <!--参数名称-->  
-         <param-value>utf-8</param-value>   <!--参数值-->  
+     <init-param>   初始化参数  
+         <param-name>encoding</param-name>  参数名称  
+         <param-value>utf-8</param-value>   参数值  
      </init-param>       
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
+    
+        
+    
+    
+    
+ <!--   <servlet>
+    	<description></description>
+    	<display-name>AsyncServlet</display-name>
+    	<servlet-name>AsyncServlet</servlet-name>
+    	<servlet-class>com.myspringmvc.filter.AsyncServlet</servlet-class>
+    	支持异步请求
+    	<async-supported>true</async-supported>    	
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>AsyncServlet</servlet-name>
+    	<url-pattern>/AsyncServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+    	<display-name>LoginServlet</display-name>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<servlet-class>com.myspringmvc.filter.LoginServlet</servlet-class>
+    </servlet>    
+    <servlet-mapping>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping> -->
 
-
-
-
-
-	<servlet>
-		<description></description>
-		<display-name>AsyncServlet</display-name>
-		<servlet-name>AsyncServlet</servlet-name>
-		<servlet-class>com.myspringmvc.filter.AsyncServlet</servlet-class>
-		<!-- 支持异步请求 -->
-		<async-supported>true</async-supported>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AsyncServlet</servlet-name>
-		<url-pattern>/AsyncServlet</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<display-name>LoginServlet</display-name>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.myspringmvc.filter.LoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/LoginServlet</url-pattern>
-	</servlet-mapping>
-
-
-	<!-- 配置DispatchcerServlet -->
-	<servlet>
-		<servlet-name>springDispatcherServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!-- 配置Spring mvc下的配置文件的位置和名称 -->
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:mvc-dispatcher-servlet.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
+    <!-- 配置DispatchcerServlet -->
+ <!--    <servlet>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        配置Spring mvc下的配置文件的位置和名称
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:mvc-dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
 	<servlet-mapping>
 		<servlet-name>springDispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-
+	</servlet-mapping>    
+ -->
+    
 </web-app>
