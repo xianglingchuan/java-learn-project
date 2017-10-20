@@ -95,10 +95,11 @@
         <property name="suffix" value=".jsp"/>  
     </bean>      
     
-    <!-- start 添加定时器 -->    
-	<bean id="simpleJobDetail"
+    
+    <!--**************** start 添加定时器 ****************-->    
+	<!-- <bean id="simpleJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" value="myBean" />
+		<property name="targetObject" ref="myBean" />
 		<property name="targetMethod" value="printMessage" />
 	</bean>  
 
@@ -112,21 +113,20 @@
 			</map>
 		</property>
 		<property name="Durability" value="true"/>				
-	</bean>
+	</bean> -->
  
 	<!-- 距离当前时间1秒之后执行，之后每隔两秒钟执行一次 -->
-	<bean id="mySimpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+	<!-- <bean id="mySimpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
 	    <property name="jobDetail"  ref="simpleJobDetail"/>
 	    <property name="startDelay"  value="1000"/>
 	    <property name="repeatInterval"  value="2000"/>
-	</bean>
+	</bean> -->
 	
 	<!-- 每隔5秒钟执行一次 -->
-	<bean id="myCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	<!-- <bean id="myCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 	    <property name="jobDetail"  ref="firstComplexJobDetail"/>
 	    <property name="cronExpression"  value="0/5 * * ? * *"/>
 	</bean> 
- 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 	    <property name="jobDetails">
 	        <list>
@@ -140,9 +140,8 @@
 	            <ref bean="myCronTrigger"/>
 	        </list>
 	    </property>
-	</bean> 
- 
-	<!-- end 添加定时器 -->  
+	</bean>  --> 
+	<!--**************** end 添加定时器 ****************-->  
         
 
 </beans>

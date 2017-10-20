@@ -38,7 +38,7 @@
 	<!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:jdbc.properties" />
+		<property name="location" value="classpath:properties/jdbc.properties" />
 	</bean>
 	<!-- 配置数据源 -->
     <bean id="dataSource"
@@ -49,8 +49,6 @@
 		<property name="password" value="111111" />
 	</bean>
 	
-	
-
 
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -124,16 +122,16 @@
     </bean>  
       
     <!-- 配置缓存管理 -->  
-    <!-- <bean id="cacheManager" class="com.myspringmvc.memcached.cached.MemcachedCacheManager">  
+    <bean id="cacheManager" class="com.myspringmvc.memcached.cached.MemcachedCacheManager">  
         <property name="memcachedClient" ref="memcachedClient"/>  
-        配置缓存时间   
+        <!-- 配置缓存时间 -->   
         <property name="configMap">  
              <map>  
-                 key缓存对象名称   value缓存过期时间   
+                 <!-- key缓存对象名称   value缓存过期时间 -->   
                  <entry key="systemCache" value="3600"/>  
              </map>  
         </property>  
-    </bean>   -->	
+    </bean>  	
 	
 	
 	

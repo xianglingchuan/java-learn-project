@@ -11,7 +11,7 @@
     <!-- 配置Spring容器 -->
     <context-param>
          <param-name>contextConfigLocation</param-name>
-         <param-value>classpath:applicationContext*.xml</param-value>
+         <param-value>classpath:config/applicationContext*.xml</param-value>
     </context-param>
     
     <!-- 配置DispatchcerServlet -->
@@ -21,7 +21,7 @@
         <!-- 配置Spring mvc下的配置文件的位置和名称 -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:mvc-dispatcher-servlet.xml</param-value>
+            <param-value>classpath:config/mvc-dispatcher-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
