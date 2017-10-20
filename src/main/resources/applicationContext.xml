@@ -124,16 +124,16 @@
     </bean>  
       
     <!-- 配置缓存管理 -->  
-    <bean id="cacheManager" class="com.myspringmvc.memcached.cached.MemcachedCacheManager">  
+    <!-- <bean id="cacheManager" class="com.myspringmvc.memcached.cached.MemcachedCacheManager">  
         <property name="memcachedClient" ref="memcachedClient"/>  
-        <!-- 配置缓存时间 -->   
+        配置缓存时间   
         <property name="configMap">  
              <map>  
-                 <!-- key缓存对象名称   value缓存过期时间 -->   
+                 key缓存对象名称   value缓存过期时间   
                  <entry key="systemCache" value="3600"/>  
              </map>  
         </property>  
-    </bean>  	
+    </bean>   -->	
 	
 	
 	

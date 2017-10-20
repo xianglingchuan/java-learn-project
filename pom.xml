@@ -158,7 +158,7 @@
 			<artifactId>java-memcached</artifactId> <version>2.6.6</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.googlecode/hibernate-memcached -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.googlecode</groupId>
 			<artifactId>hibernate-memcached</artifactId>
 			<version>1.3</version>
@@ -169,18 +169,30 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+		    <groupId>commons-pool</groupId>
+		    <artifactId>commons-pool</artifactId>
+		    <version>1.6</version>
+		</dependency> -->
 		<!-- end memcached -->
-		
+        <!-- start 日志处理jar -->
+<!-- 		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency> -->
+		<!-- end 日志处理jar -->		
+
 
 
         
 		<!--************ start hibernate ************-->
 		<!-- 注释类 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- 在4.3.11.Final下可以运行成功 -->
 		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> 
@@ -193,7 +205,7 @@
 			<version>0.9.5.2</version> </dependency> -->
 
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.1.2.Final</version>
@@ -215,7 +227,7 @@
 			<groupId>com.fasterxml</groupId>
 			<artifactId>classmate</artifactId>
 			<version>1.3.3</version>
-		</dependency>
+		</dependency> -->
 		<!--************ end hibernate ************-->
 
 

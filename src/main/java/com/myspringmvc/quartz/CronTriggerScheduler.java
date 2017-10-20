@@ -79,12 +79,12 @@ public class CronTriggerScheduler {
 		
 		
 		// 创建Scheduler实例
-		SchedulerFactory factory = new StdSchedulerFactory();
-		Scheduler scheduler = factory.getScheduler();
-		scheduler.start();
-		//返回即将要执行的下一次任务时间
-		Date nextDate = scheduler.scheduleJob(jobDetail, trigger);
-		System.out.println("scheduled time is:"+simpleDateFormat.format(nextDate));
+//		SchedulerFactory factory = new StdSchedulerFactory();
+//		Scheduler scheduler = factory.getScheduler();
+//		scheduler.start();
+//		//返回即将要执行的下一次任务时间
+//		Date nextDate = scheduler.scheduleJob(jobDetail, trigger);
+//		System.out.println("scheduled time is:"+simpleDateFormat.format(nextDate));
 		
 		//Scheduler执行两秒后挂起
 //		Thread.sleep(2000L);
@@ -96,9 +96,9 @@ public class CronTriggerScheduler {
 		
 		//void shutdown(true)表示等待所有正在执行的job执行完毕之后，再关闭scheduler
 		//void shutdown(false)即shutdown()表示直接关闭scheduler
-		Thread.sleep(2000L);
-		scheduler.shutdown(false);
-	    System.out.println("scheduler is shutdown?"+scheduler.isShutdown());
+		//Thread.sleep(2000L);
+		//scheduler.shutdown(false);
+	    //System.out.println("scheduler is shutdown?"+scheduler.isShutdown());
 		
 		
 		

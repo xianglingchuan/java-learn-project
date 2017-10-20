@@ -98,7 +98,7 @@
     <!-- start 添加定时器 -->    
 	<bean id="simpleJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="myBean" />
+		<property name="targetObject" value="myBean" />
 		<property name="targetMethod" value="printMessage" />
 	</bean>  
 
