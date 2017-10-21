@@ -1,5 +1,8 @@
 package com.myspringmvc.aop.service;
 
+import javax.annotation.Resource;
+
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +21,9 @@ public class AdviceService {
 	public void getName() {
 		System.out.println("execute getName...");
 	}
-	
-	
+
 	public void getAge() {
 		throw new RuntimeException("Rutime Exception");
-	}	
+	}
 
 }

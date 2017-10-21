@@ -21,18 +21,57 @@
 	<context:annotation-config/>
 	<mvc:annotation-driven/>
 	
-	<!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-    <bean id="cBookAuthAspect" class="com.aop.config.CBookAuthAspect"/>
-	 -->
 	
-	<!-- 自动扫描 -->
-	<!-- <context:component-scan base-package="com.springmvc/**/service" /> -->
-	<!-- <context:component-scan base-package="com.springmvc" /> -->
-	<!-- <context:component-scan base-package="com.myspringmvc" ></context:component-scan>  -->
-    <!--<context:component-scan base-package="com.snaillove.common.service" />-->
-    
-    <!-- Junit 测试是否正确引入spring配置文件 -->
-    <!-- <bean id="currentDate" class="java.util.Date"></bean> -->
+   <!--memcached 缓存配置 -->
+   <!-- <import resource="app-context-memcache.xml" /> -->
+   <!-- <import resource="app-context-spymemcached.xml" /> -->
+   
+   
+    <!--   
+        枚举类型要想注入到类中，一定要先使用org.springframework.beans.factory.config.FieldRetrievingFactoryBean类将枚举类型进行转换  
+        将DefaultHashAlgorithm.KETAMA_HASH转换为KETAMA_HASH这个bean，  
+        然后在要注入的bean中使用<property name="hashAlg" ref="KETAMA_HASH" />引用即可。  
+     -->  
+    <bean id="KETAMA_HASH" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">  
+        <property name="staticField" value="net.spy.memcached.DefaultHashAlgorithm.KETAMA_HASH" />  
+    </bean>  
+  
+    <bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">  
+  
+        <!-- 一个字符串，包括由空格或逗号分隔的主机或IP地址与端口号 -->  
+        <property name="servers" value="192.168.1.100:11211" />  
+        <!-- 指定要使用的协议(BINARY,TEXT),默认是TEXT -->  
+        <property name="protocol" value="BINARY" />  
+        <!-- 设置默认的转码器(默认以net.spy.memcached.transcoders.SerializingTranscoder) -->  
+        <property name="transcoder">  
+            <bean class="net.spy.memcached.transcoders.SerializingTranscoder">  
+                <property name="compressionThreshold" value="1024" />  
+            </bean>  
+        </property>  
+        <!-- 以毫秒为单位设置默认的操作超时时间 -->  
+        <property name="opTimeout" value="1000" />  
+        <property name="timeoutExceptionThreshold" value="1998" />  
+        <!-- 设置哈希算法 -->  
+        <property name="hashAlg" ref="KETAMA_HASH" />  
+        <!-- 设置定位器类型(ARRAY_MOD,CONSISTENT),默认是ARRAY_MOD -->  
+        <property name="locatorType" value="CONSISTENT" />  
+        <!-- 设置故障模式(取消，重新分配，重试)，默认是重新分配 -->  
+        <property name="failureMode" value="Redistribute" />  
+        <!-- 想使用Nagle算法，设置为true -->  
+        <property name="useNagleAlgorithm" value="false" />  
+    </bean>  
+   
+   
+     
+   
+   
+   
+   <!-- 定时器配置文件 -->
+   <!-- <import resource="quartz-config.xml" /> -->   
+	
+	
+	
+	
     
     
 	<!-- 引入配置文件 -->
@@ -72,69 +111,8 @@
 		<property name="dataSource" ref="dataSourceDev" />
 	</bean>
 	
-	
-	
-	
-	
-	
-	
-   <!-- =========  配置Memcached ========= -->  
-   <!-- 开启缓存 -->    
-   <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" />    
-    <!-- 导入外部properties -->  
-    <context:property-placeholder location="classpath:memcached.properties"/>  
-      
-     <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"  
-        factory-method="getInstance" init-method="initialize" destroy-method="shutDown">  
-       <constructor-arg>  
-            <value>neeaMemcachedPool</value>  
-        </constructor-arg>  
-        <property name="servers">  
-            <list>  
-                <value>${memcache.server}</value>  
-            </list>  
-        </property>  
-        <property name="initConn">  
-            <value>${memcache.initConn}</value>  
-        </property>  
-        <property name="minConn">  
-            <value>${memcache.minConn}</value>  
-        </property>  
-        <property name="maxConn">  
-            <value>${memcache.maxConn}</value>  
-        </property>  
-        <property name="maintSleep">  
-            <value>${memcache.maintSleep}</value>  
-        </property>  
-        <property name="nagle">  
-            <value>${memcache.nagle}</value>  
-        </property>  
-        <property name="socketTO">  
-            <value>${memcache.socketTO}</value>  
-        </property>  
-    </bean>  
-      
-    <!-- 配置MemcachedClient -->  
-    <bean id="memcachedClient" class="com.danga.MemCached.MemCachedClient">  
-        <constructor-arg>  
-            <value>neeaMemcachedPool</value>  
-        </constructor-arg>  
-    </bean>  
-      
-    <!-- 配置缓存管理 -->  
-    <bean id="cacheManager" class="com.myspringmvc.memcached.cached.MemcachedCacheManager">  
-        <property name="memcachedClient" ref="memcachedClient"/>  
-        <!-- 配置缓存时间 -->   
-        <property name="configMap">  
-             <map>  
-                 <!-- key缓存对象名称   value缓存过期时间 -->   
-                 <entry key="systemCache" value="3600"/>  
-             </map>  
-        </property>  
-    </bean>  	
-	
-	
-	
+  <!-- 为了使用@Resource标签，这里必须配置一个后置处理器 -->  
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />   	
 	
 	
 </beans>
