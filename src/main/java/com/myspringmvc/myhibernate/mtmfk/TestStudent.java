@@ -25,10 +25,10 @@ public class TestStudent {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		Teacher teacher1 = new Teacher("t001","teacher Xlc");
-		Teacher teacher2 = new Teacher("t002","teacher Li");
-		Teacher teacher3 = new Teacher("t003","teacher Wang");
-		Teacher teacher4 = new Teacher("t004","teacher Zhang");
+		Teacher teacher1 = new Teacher("t005","teacher向");
+		Teacher teacher2 = new Teacher("t006","teacher Li");
+		Teacher teacher3 = new Teacher("t007","teacher Wang");
+		Teacher teacher4 = new Teacher("t008","teacher Zhang");
 		
 		Set<Teacher> tSet1 = new HashSet<Teacher>();
 		tSet1.add(teacher1);
