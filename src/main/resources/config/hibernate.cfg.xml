@@ -86,10 +86,30 @@
 			<!-- <mapping class="com.myspringmvc.myhibernate.mtmfk.entity.Student" />
 			<mapping class="com.myspringmvc.myhibernate.mtmfk.entity.Teacher" /> -->	
 			
-			<mapping class="com.myspringmvc.myhibernate.mycatch.entity.Teacher" />		
+			<!-- <mapping class="com.myspringmvc.myhibernate.mycatch.entity.Teacher" />	 -->
+			
+			
+			<!-- <mapping resource="com/myspringmvc/myhibernate/xml/entity/GradeXml.hbm.xml" />	
+			<mapping resource="com/myspringmvc/myhibernate/xml/entity/StudentXml.hbm.xml" /> -->
 						
 			<!-- class-cache config -->  
             <!-- <class-cache class="com.myspringmvc.myhibernate.mycatch.entity.Teacher"  usage="read-write" /> --> 			
+						
+			
+			
+							
+			<mapping resource="com/myspringmvc/myhibernate/hql/entity/Seller.hbm.xml" />				
+			<mapping resource="com/myspringmvc/myhibernate/hql/entity/OrderItem.hbm.xml" />
+			<mapping resource="com/myspringmvc/myhibernate/hql/entity/Order.hbm.xml" />
+			<mapping resource="com/myspringmvc/myhibernate/hql/entity/Customer.hbm.xml" />
+			<mapping resource="com/myspringmvc/myhibernate/hql/entity/Commodity.hbm.xml" />		
+					
+					
+					
+					
+					
+					
+					
 							
 
 		</session-factory>
